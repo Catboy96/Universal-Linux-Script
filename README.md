@@ -2,11 +2,12 @@
 A shell script with built-in variables which can simply script writting.  
 For example, ```pkg.install nginx``` equals ```apt-get -y install nginx``` on Debian & ```yum -y install nginx``` on CentOS.  
   
-# ULS language  
-ULS's language is same as Linux shell script's language.  
+## ULS language  
+ULS's language is **same as Linux shell script's language**.  
 In another word, ULS is shell scripts with built-in variables which can be replaced to specific commands or strings when executing on your device.  
 Here's a full example:  
-**test.uls**:```   
+**test.uls**:  
+```
 pkg.update  
 pkg.install nginx  
 echo net.ip  
@@ -16,4 +17,19 @@ elif [ dev.virt == "openvz" ]; then
     echo "OpenVZ"  
 fi  
 ```  
-When
+When **test.uls** runs on a Debian with "123.123.123.123" as public IPv4 address & KVM as virtualization technology, it will be converted to:
+```
+apt-get update  
+apt-get -y install nginx  
+echo "123.123.123.123"  
+if [ "kvm" == "kvm" ]; then  
+    echo "KVM"  
+elif [ "kvm" == "openvz" ]; then  
+    echo "OpenVZ"  
+fi  
+```   
+  
+## All built-in variables  
+
+  
+## How to setup  
