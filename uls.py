@@ -20,7 +20,7 @@ def GetInfo():
 
     # Determine which Linux distro is running on the device.
     print('Determining Linux distrubution...')
-    strDist = platform.linux_distribution()[0]
+    strDist = platform.linux_distribution()[0].lower()
     pUpd, pIns, pUpg, pRem, pPur = '', '', '', '', ''
     if strDist == 'debian' or strDist == 'ubuntu' or strDist == 'elementary' or strDist == 'kali' or strDist == 'raspbian':
         pUpd = 'apt-get update'
