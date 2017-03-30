@@ -7,7 +7,7 @@ import os
 # Show help.
 def ShowHelp():
     print("Universal Linux Script v0.0.1 by CYROFORCE.NET")
-    print("Visit https://cyroforce.net/uls for documents and more information.")
+    print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
     print("./uls.py --help: Show this help information")
