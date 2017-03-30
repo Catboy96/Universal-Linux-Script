@@ -29,7 +29,7 @@ elif [ "kvm" == "openvz" ]; then
 fi  
 ```   
   
-## All built-in variables  
-
+## Starting Guide: How to setup & run ULS script  
+[Go to WiKi](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Starting-Guide:-How-to-setup-&-run-ULS-script)
   
-## How to setup  
+## All built-in variables  
