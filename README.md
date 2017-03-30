@@ -1,5 +1,6 @@
 # Universal Linux Script
-A shell script with built-in variables which can simply script writting.  
+*ULS Pronounces "U-Less"*
+A shell script with built-in variables which can simply script writting.  
 For example, ```pkg.install nginx``` equals ```apt-get -y install nginx``` on Debian & ```yum -y install nginx``` on CentOS.  
   
 ## ULS language  
