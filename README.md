@@ -18,7 +18,7 @@ elif [ dev.virt == "openvz" ]; then
     echo "OpenVZ"  
 fi  
 ```  
-When **test.uls** runs on a Debian device with "**123.123.123.123**" as public IPv4 address & **KVM** as virtualization technology, it will be converted to:
+When **test.uls** executed on a Debian device with "**123.123.123.123**" as public IPv4 address & **KVM** as virtualization technology, it will be converted to:
 ```
 apt-get update  
 apt-get -y install nginx  
