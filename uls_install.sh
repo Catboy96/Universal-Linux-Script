@@ -11,7 +11,7 @@ dos2unix uls.py
 echo "Make ULS a true command..."
 mkdir /usr/share/uls
 mv uls.py /usr/share/uls/uls.py
-ln uls.py /usr/bin/uls
+ln /usr/share/uls/uls.py /usr/bin/uls
 
 echo "Let ULS get your system information..." 
 uls --getinfo 
