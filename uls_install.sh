@@ -19,4 +19,4 @@ uls --getinfo
 clear 
 
 echo "All Done." 
-echo "Now use './uls.py [Path-to-ULS-script]' to run a ULS script."
+echo "Now use 'uls [Path-to-ULS-script]' to run a ULS script."
