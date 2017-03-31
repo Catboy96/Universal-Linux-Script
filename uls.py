@@ -6,8 +6,8 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v0.0.1 by CYROFORCE.NET")
-    print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
+    print("Universal Linux Script v0.0.1 by CYRO4")
+    print("Visit https://cyroforce.net/uls for documents and more information.")
     print("")
     print("Usage:")
     print("./uls.py --help: Show this help information")
@@ -21,19 +21,17 @@ def GetInfo():
     # Determine which Linux distro is running on the device.
     print('Determining Linux distrubution...')
     strDist = platform.linux_distribution()[0].lower()
-    pUpd, pIns, pUpg, pRem, pPur = '', '', '', '', ''
+    pUpd, pIns, pUpg, pRem = '', '', '', ''
     if strDist == 'debian' or strDist == 'ubuntu' or strDist == 'elementary' or strDist == 'kali' or strDist == 'raspbian':
         pUpd = 'apt-get update'
         pIns = 'apt-get -y install'
         pUpg = 'apt-get -y upgrade'
         pRem = 'apt-get -y remove'
-        pPur = 'apt-get -y purge'
     elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora':
         pUpd = 'yum update'
         pIns = 'yum -y install'
         pUpg = 'yum -y upgrade'
         pRem = 'yum -y remove'
-        pPur = 'yum -y purge'
 
     # Get virtualization technology
     print('Determining virtualization technology...')
@@ -97,7 +95,6 @@ def GetInfo():
         'pkg.install': pIns,
         'pkg.upgrade': pUpg,
         'pkg.remove': pRem,
-        'pkg.purge': pPur,
         'sys.os': strDist,
         'sys.version': strVersion,
         'sys.arch': strArch,
