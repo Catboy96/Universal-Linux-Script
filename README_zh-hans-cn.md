@@ -1,6 +1,6 @@
 # 通用Linux脚本 (Universal Linux Script, ULS)
 *ULS 发音为 "U-Less"*  
-一个内建系统信息变量的Shell脚本，可以帮助你简化Shell脚本的开发。  
+一个内建系统信息变量的Shell脚本，可以帮助你简化Shell脚本的开发。    
 比如, ```pkg.install nginx``` 相当于 Debian 上的```apt-get -y install nginx``` 和 CentOS 上的 ```yum -y install nginx```。 
   
 ## ULS 语言  
