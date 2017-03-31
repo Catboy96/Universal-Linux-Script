@@ -6,7 +6,7 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v0.0.2 by CYRO4S")
+    print("Universal Linux Script v2 by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
