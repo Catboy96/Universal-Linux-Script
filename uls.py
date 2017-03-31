@@ -6,7 +6,7 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v2 by CYRO4S")
+    print("Universal Linux Script v3 by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
@@ -51,6 +51,13 @@ def GetInfo():
     strHostname = platform.node()
     print('Getting OS bit...')
     strBit = platform.architecture()[0]
+
+    print('Checking for ROOT...')
+    strRoot = ''
+    if os.geteuid() == 0:
+        strRoot = 'true'
+    else:
+        strRoot = 'false'
     
     # Get hardware info
     print('Getting CPU information...')
@@ -101,6 +108,7 @@ def GetInfo():
         'sys.bit': strBit,
         'sys.kernel': strKernel,
         'sys.hostname': strHostname,
+        'sys.root': strRoot,
         'dev.virt': strVirt,
         'dev.cpu': strCPU,
         'dev.cores': strCores,
@@ -156,6 +164,7 @@ def RunScript(strPath):
             .replace('sys.bit', '\"' + j.get('sys.bit') + '\"') \
             .replace('sys.kernel', '\"' + j.get('sys.kernel') + '\"') \
             .replace('sys.hostname', '\"' + j.get('sys.hostname') + '\"') \
+            .replace('sys.root', '\"' + j.get('sys.root') + '\"') \
 
             # Replace DEV.*
             .replace('dev.virt', '\"' + j.get('dev.virt') + '\"') \
