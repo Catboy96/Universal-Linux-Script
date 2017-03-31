@@ -17,8 +17,8 @@ if [ dev.virt == "kvm" ]; then
 elif [ dev.virt == "openvz" ]; then  
     echo "OpenVZ"  
 fi  
-```  
-When **test.uls** executed on a Debian device with "**123.123.123.123**" as public IPv4 address & **KVM** as virtualization technology, it will be converted to:
+```  
+当 **test.uls** 公共IPv4地址为 "**123.123.123.123**"、虚拟化技术为 **KVM**、系统为 **Debian** 的设备上执行时，它将被转化为：
 ```
 apt-get update  
 apt-get -y install nginx  
@@ -30,11 +30,11 @@ elif [ "kvm" == "openvz" ]; then
 fi  
 ```   
   
-## Starting Guide: How to setup & run ULS script  
-[Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Starting-Guide:-How-to-setup-&-run-ULS-script)  
+## 快速开始：安装并运行ULS脚本 
+[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Starting-Guide:-How-to-setup-&-run-ULS-script)  
   
-## All built-in variables  
-[Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
+## 所有内建的语句和脚本 
+[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
   
-## Update history
-[Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Update-history)
+## 更新历史
+[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Update-history)
