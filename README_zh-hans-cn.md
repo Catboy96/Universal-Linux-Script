@@ -35,7 +35,7 @@ fi
 ## 快速开始：安装并运行ULS脚本 
 [前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Starting-Guide:-How-to-setup-&-run-ULS-script)  
   
-## 所有内建的语句和脚本 
+## 所有内建的语句和变量 
 [前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
   
 ## 更新历史
