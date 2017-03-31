@@ -3,6 +3,9 @@
 A shell script with built-in variables which can simply script writting.  
 For example, ```pkg.install nginx``` equals ```apt-get -y install nginx``` on Debian & ```yum -y install nginx``` on CentOS.  
   
+## README.md in other languages:
+[简体中文](https://github.com/CYRO4S/Universal-Linux-Script/blob/master/README_zh-hans-cn.md)
+  
 ## ULS language  
 ULS's language is **same as Linux shell script's language**.  
 In another word, ULS is a shell script with built-in variables which can be replaced to specific commands or strings when executed on your device.   
