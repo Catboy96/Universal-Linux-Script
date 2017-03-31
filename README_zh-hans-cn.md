@@ -7,6 +7,7 @@
 ULS的语言**与Shell脚本语言相同**。  
 换句话说， ULS是一个内建了系统信息变量的Shell脚本，在执行时这些变量会根据你的系统信息被替换为相应的命令或字符串。  
 完整实例：  
+  
 **test.uls**:  
 ```
 pkg.update  
@@ -18,7 +19,10 @@ elif [ dev.virt == "openvz" ]; then
     echo "OpenVZ"  
 fi  
 ```  
-当 **test.uls** 公共IPv4地址为 "**123.123.123.123**"、虚拟化技术为 **KVM**、系统为 **Debian** 的设备上执行时，它将被转化为：
+  
+当 **test.uls** 公共IPv4地址为 "**123.123.123.123**"、虚拟化技术为 **KVM**、系统为 **Debian** 的设备上执行时，它将被转化为：  
+  
+  
 ```
 apt-get update  
 apt-get -y install nginx  
