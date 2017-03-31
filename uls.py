@@ -155,8 +155,7 @@ def RunScript(strPath):
             .replace('pkg.install', j.get('pkg.install')) \
             .replace('pkg.upgrade', j.get('pkg.upgrade')) \
             .replace('pkg.remove', j.get('pkg.remove')) \
-            .replace('pkg.purge', j.get('pkg.purge')) \
-
+            
             # Replace SYS.*
             .replace('sys.os', '\"' + j.get('sys.os') + '\"') \
             .replace('sys.version', '\"' + j.get('sys.version') + '\"') \
