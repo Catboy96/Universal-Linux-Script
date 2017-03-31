@@ -5,7 +5,7 @@ For example, ```pkg.install nginx``` equals ```apt-get -y install nginx``` on De
   
 ## ULS language  
 ULS's language is **same as Linux shell script's language**.  
-In another word, ULS is a shell script with built-in variables which can be replaced to specific commands or strings when executed on your device.  
+In another word, ULS is a shell script with built-in variables which can be replaced to specific commands or strings when executed on your device.   
 Here's a full example:  
 **test.uls**:  
 ```
@@ -18,7 +18,7 @@ elif [ dev.virt == "openvz" ]; then
     echo "OpenVZ"  
 fi  
 ```  
-When **test.uls** runs on a Debian device with "123.123.123.123" as public IPv4 address & KVM as virtualization technology, it will be converted to:
+When **test.uls** runs on a Debian device with "**123.123.123.123**" as public IPv4 address & **KVM** as virtualization technology, it will be converted to:
 ```
 apt-get update  
 apt-get -y install nginx  
