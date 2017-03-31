@@ -35,3 +35,6 @@ fi
   
 ## All built-in variables  
 [Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
+  
+## Update history
+[Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Update-history)
