@@ -19,10 +19,7 @@ elif [ dev.virt == "openvz" ]; then
     echo "OpenVZ"  
 fi  
 ```  
-  
 当 **test.uls** 公共IPv4地址为 "**123.123.123.123**"、虚拟化技术为 **KVM**、系统为 **Debian** 的设备上执行时，它将被转化为：  
-  
-  
 ```
 apt-get update  
 apt-get -y install nginx  
