@@ -1,5 +1,11 @@
 #!/usr/bin/python3.4
 # -*- coding: utf-8 -*-
+# ----------------------
+# About exit codes:
+# 1: "/usr/share/uls/device.json" not found.
+# 2: ULS script path is invalid.
+# 3: Internet is unavailable for updating.
+# ----------------------
 
 import platform
 import json
@@ -8,7 +14,7 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v5 by CYRO4S")
+    print("Universal Linux Script v4 by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
@@ -16,7 +22,7 @@ def ShowHelp():
     print("uls --getinfo: Refresh system information.")
     print("uls --update: Update ULS to latest version.")
     print("uls [ULS Script Path]: Run ULS script.")
-    exit()
+    exit(0)
 
 # Getting system information & save to file.
 def GetInfo():
@@ -31,7 +37,7 @@ def GetInfo():
         pUpg = 'apt-get -y upgrade'
         pRem = 'apt-get -y remove'
         strBase = 'debian'
-    elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora' or strDist == 'redhat linux' or strDist == 'centos linux' or strDist == 'fedora linux':
+    elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora':
         pUpd = 'yum -y upgrade'
         pIns = 'yum -y install'
         pUpg = 'yum -y upgrade'
@@ -43,6 +49,7 @@ def GetInfo():
     rVirt = os.popen('virt-what')
     strVirt = rVirt.read().strip('\n')
     rVirt.close()
+
     
     # Get system information
     print('Getting system version...')
@@ -199,7 +206,20 @@ def RunScript(strPath):
 
 # Update ULS.
 def Update():
-    os.system("wget -O /usr/share/uls/uls_update.sh https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash /usr/share/uls/uls_update.sh")
+
+    # Check for Internet connection before update
+    print('Checking for Internet connection...')
+    rPing = os.popen("ping -c 3 raw.githubusercontent.com | grep '0 received' | wc -l")
+    strPing = rPing.read().strip('\n')
+    rPing.close()
+
+    # If Internet is unavailable, exit.
+    if strPing == '1':
+        print('Internet is unavailable. Check your connection before running update.')
+        exit(3)
+
+    # Now, do the update
+    os.system("wget -O https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash uls_update.sh")
     exit(0)
 
 # Main
