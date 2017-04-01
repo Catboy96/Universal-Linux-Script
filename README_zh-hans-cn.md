@@ -32,8 +32,11 @@ elif [ "kvm" == "openvz" ]; then
 fi  
 ```   
   
-## 快速开始：安装并运行ULS脚本 
-[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Starting-Guide:-How-to-setup-&-run-ULS-script)  
+## 走近ULS: 全新的Shell编程体验 
+[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E8%B5%B0%E8%BF%91ULS:-%E5%85%A8%E6%96%B0%E7%9A%84Shell%E7%BC%96%E7%A8%8B%E4%BD%93%E9%AA%8C%E3%80%82)  
+  
+## 安装与使用ULS  
+[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8ULS)  
   
 ## 所有内建的语句和变量 
 [前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
