@@ -24,17 +24,19 @@ def GetInfo():
     # Determine which Linux distro is running on the device.
     print('Determining Linux distrubution...')
     strDist = platform.linux_distribution()[0].lower()
-    pUpd, pIns, pUpg, pRem = '', '', '', ''
+    pUpd, pIns, pUpg, pRem, strBase = '', '', '', '', ''
     if strDist == 'debian' or strDist == 'ubuntu' or strDist == 'elementary' or strDist == 'kali' or strDist == 'raspbian':
         pUpd = 'apt-get -y upgrade'
         pIns = 'apt-get -y install'
         pUpg = 'apt-get -y upgrade'
         pRem = 'apt-get -y remove'
+        strBase = 'debian'
     elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora':
         pUpd = 'yum -y upgrade'
         pIns = 'yum -y install'
         pUpg = 'yum -y upgrade'
         pRem = 'yum -y remove'
+        strBase = 'redhat'
 
     # Get virtualization technology
     print('Determining virtualization technology...')
@@ -106,6 +108,7 @@ def GetInfo():
         'pkg.upgrade': pUpg,
         'pkg.remove': pRem,
         'sys.os': strDist,
+        'sys.osbase': strBase,
         'sys.version': strVersion,
         'sys.arch': strArch,
         'sys.bit': strBit,
@@ -162,6 +165,7 @@ def RunScript(strPath):
             
             # Replace SYS.*
             .replace('sys.os', '\"' + j.get('sys.os') + '\"') \
+            .replace('sys.osbase', '\"' + j.get('sys.osbase') + '\"') \
             .replace('sys.version', '\"' + j.get('sys.version') + '\"') \
             .replace('sys.arch', '\"' + j.get('sys.arch') + '\"') \
             .replace('sys.bit', '\"' + j.get('sys.bit') + '\"') \
