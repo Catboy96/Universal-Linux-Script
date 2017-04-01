@@ -196,8 +196,7 @@ def RunScript(strPath):
 
 # Update ULS.
 def Update():
-    os.system("cd /usr/share/uls")
-    os.system("wget https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash uls_update.sh")
+    os.system("wget -O https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash uls_update.sh")
     exit(0)
 
 # Main
