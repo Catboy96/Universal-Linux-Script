@@ -37,7 +37,7 @@ def GetInfo():
         pUpg = 'apt-get -y upgrade'
         pRem = 'apt-get -y remove'
         strBase = 'debian'
-    elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora':
+    elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora' or strDist == 'redhat linux' or strDist == 'centos linux' or strDist == 'fedora linux':
         pUpd = 'yum -y upgrade'
         pIns = 'yum -y install'
         pUpg = 'yum -y upgrade'
