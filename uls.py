@@ -1,4 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.4
+# -*- coding: utf-8 -*-
+
 import platform
 import json
 import sys
@@ -6,13 +8,14 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v3 by CYRO4S")
+    print("Universal Linux Script v4 by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
-    print("./uls.py --help: Show this help information")
-    print("./uls.py --getinfo: Refresh system information")
-    print("./uls.py [ULS Script Path]: Run ULS script.")
+    print("uls --help: Show this help information.")
+    print("uls --getinfo: Refresh system information.")
+    print("uls --update: Update ULS to latest version.")
+    print("uls [ULS Script Path]: Run ULS script.")
     exit()
 
 # Getting system information & save to file.
@@ -23,12 +26,12 @@ def GetInfo():
     strDist = platform.linux_distribution()[0].lower()
     pUpd, pIns, pUpg, pRem = '', '', '', ''
     if strDist == 'debian' or strDist == 'ubuntu' or strDist == 'elementary' or strDist == 'kali' or strDist == 'raspbian':
-        pUpd = 'apt-get update'
+        pUpd = 'apt-get -y upgrade'
         pIns = 'apt-get -y install'
         pUpg = 'apt-get -y upgrade'
         pRem = 'apt-get -y remove'
     elif strDist == 'redhat' or strDist == 'centos' or strDist == 'fedora':
-        pUpd = 'yum update'
+        pUpd = 'yum -y upgrade'
         pIns = 'yum -y install'
         pUpg = 'yum -y upgrade'
         pRem = 'yum -y remove'
@@ -119,24 +122,25 @@ def GetInfo():
         'net.ipv6': strIP6
     }
     
-    with open('device.json', 'w') as f:
+    with open('/usr/share/uls/device.json', 'w') as f:
         json.dump(strJson, f, sort_keys=False, indent=4)
 
     # Finalize
     print('--------------')
-    print("All done. Now you can run ULS scripts by using './uls.py [ULS Script Path]' command,")
-    print("or you can refresh system information by using './uls.py --getinfo' command.")
+    print("All done. Now you can run ULS scripts by using 'uls [ULS Script Path]' command,")
+    print("or you can refresh system information by using 'uls --getinfo' command,")
+    print("or you can update ULS to the latest version by using 'uls --update command.'")
 
 # Run the script.
 def RunScript(strPath):
 
     # Check if device.json exists
-    if not os.path.isfile('device.json'):
-        print("'device.json' not found. Run './uls.py --getinfo' to generate.")
+    if not os.path.isfile('/usr/share/uls/device.json'):
+        print("'device.json' not found. Run 'uls --getinfo' to generate.")
         exit(1)
 
     # Prepare device.json
-    j = json.loads(open('device.json', 'r').read())
+    j = json.loads(open('/usr/share/uls/device.json', 'r').read())
 
     # Check if ULS script exists
     if not os.path.isfile(strPath):
@@ -145,7 +149,7 @@ def RunScript(strPath):
 
     # Read ULS script file
     lines = open(strPath, 'r').readlines()
-    f = open('script.sh', 'w')
+    f = open('/usr/share/uls/script.sh', 'w')
 
     # Start to replace
     for s in lines:
@@ -182,13 +186,19 @@ def RunScript(strPath):
     f.close()
 
     # Then execute it
-    os.system('bash script.sh')
+    os.system('bash /usr/share/uls/script.sh')
 
     # Then remove 'script.sh'
-    os.remove('script.sh')
+    os.remove('/usr/share/uls/script.sh')
 
     # Finally, exit.
     exit()
+
+# Update ULS.
+def Update():
+    os.system("cd /usr/share/uls")
+    os.system("wget https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash uls_update.sh")
+    exit(0)
 
 # Main
 if __name__ == '__main__':
@@ -199,6 +209,8 @@ if __name__ == '__main__':
             GetInfo()
         elif sys.argv[1] == "--help":
             ShowHelp()
+        elif sys.argv[1] == "--update":
+            Update()
         else:
             RunScript(sys.argv[1])
-    exit()
+    exit(0)
