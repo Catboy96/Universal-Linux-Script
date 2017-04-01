@@ -4,7 +4,7 @@ echo "Updating source..."
 apt-get update
 
 echo "Installing required packages..."
-apt-get -y install wget python3 virt-what
+apt-get -y install wget python3.4 virt-what
 yum -y install wget python34 virt-what
 
 echo "Downloading ULS..."
