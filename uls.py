@@ -43,7 +43,6 @@ def GetInfo():
     rVirt = os.popen('virt-what')
     strVirt = rVirt.read().strip('\n')
     rVirt.close()
-
     
     # Get system information
     print('Getting system version...')
