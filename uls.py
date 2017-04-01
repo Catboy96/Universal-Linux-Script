@@ -10,7 +10,9 @@
 # ----------------------
 
 import platform
+import socket
 import json
+import uuid
 import sys
 import os
 
@@ -98,6 +100,15 @@ def GetInfo():
 
 
     # Get network info
+    print('Getting your local IPv4 address...')
+    rLIP = os.popen("ifconfig -a | grep 'inet ' | cut -d ':' -f 2 |cut -d ' ' -f 1 | grep -v '^127'")
+    strLocalIP = rLIP.read().strip('\n')
+    rLIP.close()
+
+    print('Getting your MAC address...')
+    mac = uuid.UUID(int=uuid.getnode()).hex[-12:]
+    strMac = ":".join([mac[e:e+2] for e in range(0,11,2)])
+
     print('Getting your public IPv4 address...')
     rIP = os.popen('wget -qO- -t1 -T2 ipv4.icanhazip.com')
     strIP = rIP.read().strip('\n')
@@ -130,7 +141,9 @@ def GetInfo():
         'dev.ram': strRAM,
         'dev.swap': strSwap,
         'net.ip': strIP,
-        'net.ipv6': strIP6
+        'net.ipv6': strIP6,
+        'net.localip': strLocalIP,
+        'net.mac': strMac
     }
     
     with open('/usr/share/uls/device.json', 'w') as f:
@@ -191,7 +204,9 @@ def RunScript(strPath):
 
             # Replace NET.*
             .replace('net.ip', '\"' + j.get('net.ip') + '\"') \
-            .replace('net.ipv6', '\"' + j.get('net.ipv6') + '\"')
+            .replace('net.ipv6', '\"' + j.get('net.ipv6') + '\"') \
+            .replace('net.localip', '\"' + j.get('net.localip') + '\"') \
+            .replace('net.mac', '\"' + j.get('net.mac') + '\"')
         )
 
     # Save script.sh
