@@ -33,13 +33,13 @@ fi
 ```   
   
 ## 走近ULS: 全新的Shell编程体验 
-[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E8%B5%B0%E8%BF%91ULS:-%E5%85%A8%E6%96%B0%E7%9A%84Shell%E7%BC%96%E7%A8%8B%E4%BD%93%E9%AA%8C%E3%80%82)  
+[前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E8%B5%B0%E8%BF%91ULS:-%E5%85%A8%E6%96%B0%E7%9A%84Shell%E7%BC%96%E7%A8%8B%E4%BD%93%E9%AA%8C%E3%80%82)  
   
 ## 安装与使用ULS  
-[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8ULS)  
+[前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8ULS)  
   
 ## 所有内建的语句和变量 
-[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
+[前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E6%89%80%E6%9C%89%E5%86%85%E5%BB%BA%E7%9A%84%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%8F%98%E9%87%8F)  
   
 ## 更新历史
-[前往Wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Update-history)
+[前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E6%9B%B4%E6%96%B0%E5%8E%86%E5%8F%B2)
