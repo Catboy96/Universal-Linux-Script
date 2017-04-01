@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ----------------------
 # About exit codes:
-# 1000: ULS exit normally
+# 0: ULS exit normally
 # 1001: "/usr/share/uls/device.json" not found.
 # 1002: ULS script path is invalid.
 # 1003: Internet is unavailable for updating.
@@ -24,7 +24,7 @@ def ShowHelp():
     print("uls --getinfo: Refresh system information.")
     print("uls --update: Update ULS to latest version.")
     print("uls [ULS Script Path]: Run ULS script.")
-    exit(1000)
+    exit(0)
 
 # Getting system information & save to file.
 def GetInfo():
@@ -147,7 +147,7 @@ def RunScript(strPath):
 
     # Check if device.json exists
     if not os.path.isfile('/usr/share/uls/device.json'):
-        print("'device.json' not found. Run 'uls --getinfo' to generate.")
+        print("ERR_1001: 'device.json' not found. Run 'uls --getinfo' to generate.")
         exit(1001)
 
     # Prepare device.json
@@ -155,7 +155,7 @@ def RunScript(strPath):
 
     # Check if ULS script exists
     if not os.path.isfile(strPath):
-        print("ULS script not found. Ensure you entered the correct path.")
+        print("ERR_1002: ULS script path invalid. Ensure you entered the correct path.")
         exit(1002)
 
     # Read ULS script file
@@ -218,12 +218,12 @@ def Update():
 
     # If Internet is unavailable, exit.
     if strPing == '1':
-        print('Internet is unavailable. Check your connection before running update.')
+        print('ERR_1003: Internet is unavailable. Check your connection before running update.')
         exit(1003)
 
     # Now, do the update
     os.system("wget -O https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash uls_update.sh")
-    exit(1000)
+    exit(0)
 
 # Main
 if __name__ == '__main__':
@@ -238,4 +238,4 @@ if __name__ == '__main__':
             Update()
         else:
             RunScript(sys.argv[1])
-    exit(1000)
+    exit(0)
