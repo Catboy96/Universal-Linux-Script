@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 # ----------------------
 # About exit codes:
-# 1: "/usr/share/uls/device.json" not found.
-# 2: ULS script path is invalid.
-# 3: Internet is unavailable for updating.
+# 1000: ULS exit normally
+# 1001: "/usr/share/uls/device.json" not found.
+# 1002: ULS script path is invalid.
+# 1003: Internet is unavailable for updating.
+# Other: ULS will return what the converted shell script returns.
 # ----------------------
 
 import platform
@@ -22,7 +24,7 @@ def ShowHelp():
     print("uls --getinfo: Refresh system information.")
     print("uls --update: Update ULS to latest version.")
     print("uls [ULS Script Path]: Run ULS script.")
-    exit(0)
+    exit(1000)
 
 # Getting system information & save to file.
 def GetInfo():
@@ -146,7 +148,7 @@ def RunScript(strPath):
     # Check if device.json exists
     if not os.path.isfile('/usr/share/uls/device.json'):
         print("'device.json' not found. Run 'uls --getinfo' to generate.")
-        exit(1)
+        exit(1001)
 
     # Prepare device.json
     j = json.loads(open('/usr/share/uls/device.json', 'r').read())
@@ -154,7 +156,7 @@ def RunScript(strPath):
     # Check if ULS script exists
     if not os.path.isfile(strPath):
         print("ULS script not found. Ensure you entered the correct path.")
-        exit(2)
+        exit(1002)
 
     # Read ULS script file
     lines = open(strPath, 'r').readlines()
@@ -196,13 +198,14 @@ def RunScript(strPath):
     f.close()
 
     # Then execute it
-    os.system('bash /usr/share/uls/script.sh')
+    strReturn = ''
+    strReturn = os.system('bash /usr/share/uls/script.sh')
 
     # Then remove 'script.sh'
     os.remove('/usr/share/uls/script.sh')
 
     # Finally, exit.
-    exit()
+    exit(strReturn)
 
 # Update ULS.
 def Update():
@@ -216,11 +219,11 @@ def Update():
     # If Internet is unavailable, exit.
     if strPing == '1':
         print('Internet is unavailable. Check your connection before running update.')
-        exit(3)
+        exit(1003)
 
     # Now, do the update
     os.system("wget -O https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash uls_update.sh")
-    exit(0)
+    exit(1000)
 
 # Main
 if __name__ == '__main__':
@@ -235,4 +238,4 @@ if __name__ == '__main__':
             Update()
         else:
             RunScript(sys.argv[1])
-    exit(0)
+    exit(1000)
