@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # ----------------------
 # About exit codes:
@@ -6,6 +6,8 @@
 # 1001: "/usr/share/uls/device.json" not found.
 # 1002: ULS script path is invalid.
 # 1003: Internet is unavailable for updating.
+# 1004: "uls --getinfo" must be run as ROOT.
+# 1005: "uls --update" must be run as ROOT.
 # Other: ULS will return what the converted shell script returns.
 # ----------------------
 
@@ -30,6 +32,13 @@ def ShowHelp():
 
 # Getting system information & save to file.
 def GetInfo():
+
+    # Check for ROOT
+    # If "uls --getinfo" is not run as ROOT, notify user & exit.
+    print('Checking for ROOT...')
+    if os.geteuid() != 0:
+        print("ERR_1004: 'uls --getinfo' must be run as ROOT. Use 'sudo uls --getinfo' instead.")
+        exit(1004)
 
     # Determine which Linux distro is running on the device.
     print('Determining Linux distrubution...')
@@ -67,12 +76,6 @@ def GetInfo():
     print('Getting OS bit...')
     strBit = platform.architecture()[0]
 
-    print('Checking for ROOT...')
-    strRoot = ''
-    if os.geteuid() == 0:
-        strRoot = 'true'
-    else:
-        strRoot = 'false'
     
     # Get hardware info
     print('Getting CPU information...')
@@ -133,7 +136,6 @@ def GetInfo():
         'sys.bit': strBit,
         'sys.kernel': strKernel,
         'sys.hostname': strHostname,
-        'sys.root': strRoot,
         'dev.virt': strVirt,
         'dev.cpu': strCPU,
         'dev.cores': strCores,
@@ -158,6 +160,13 @@ def GetInfo():
 # Run the script.
 def RunScript(strPath):
 
+    # Check for ROOT
+    strSudo = 'sudo '
+    strRoot = 'false'
+    if os.geteuid() == 0:
+        strSudo = ''
+        strRoot = 'true'
+
     # Check if device.json exists
     if not os.path.isfile('/usr/share/uls/device.json'):
         print("ERR_1001: 'device.json' not found. Run 'uls --getinfo' to generate.")
@@ -173,16 +182,16 @@ def RunScript(strPath):
 
     # Read ULS script file
     lines = open(strPath, 'r').readlines()
-    f = open('/usr/share/uls/script.sh', 'w')
+    f = open('/tmp/script.sh', 'w')
 
     # Start to replace
     for s in lines:
         f.write(
             # Replace PKG.*
-            s.replace('pkg.update', j.get('pkg.update')) \
-            .replace('pkg.install', j.get('pkg.install')) \
-            .replace('pkg.upgrade', j.get('pkg.upgrade')) \
-            .replace('pkg.remove', j.get('pkg.remove')) \
+            s.replace('pkg.update', strSudo + j.get('pkg.update')) \
+            .replace('pkg.install', strSudo + j.get('pkg.install')) \
+            .replace('pkg.upgrade', strSudo + j.get('pkg.upgrade')) \
+            .replace('pkg.remove', strSudo + j.get('pkg.remove')) \
             
             # Replace SYS.*
             .replace('sys.os', '\"' + j.get('sys.os') + '\"') \
@@ -192,7 +201,7 @@ def RunScript(strPath):
             .replace('sys.bit', '\"' + j.get('sys.bit') + '\"') \
             .replace('sys.kernel', '\"' + j.get('sys.kernel') + '\"') \
             .replace('sys.hostname', '\"' + j.get('sys.hostname') + '\"') \
-            .replace('sys.root', '\"' + j.get('sys.root') + '\"') \
+            .replace('sys.root', '\"' + strRoot + '\"') \
 
             # Replace DEV.*
             .replace('dev.virt', '\"' + j.get('dev.virt') + '\"') \
@@ -214,16 +223,23 @@ def RunScript(strPath):
 
     # Then execute it
     strReturn = ''
-    strReturn = os.system('bash /usr/share/uls/script.sh')
+    strReturn = os.system('bash /tmp/script.sh')
 
     # Then remove 'script.sh'
-    os.remove('/usr/share/uls/script.sh')
+    os.remove('/tmp/script.sh')
 
     # Finally, exit.
     exit(strReturn)
 
 # Update ULS.
 def Update():
+
+    # Check for ROOT
+    # If "uls --update" is not run as ROOT, notify user & exit.
+    print('Checking for ROOT...')
+    if os.geteuid() != 0:
+        print("ERR_1005: 'uls --update' must be run as ROOT. Use 'sudo uls --update' instead.")
+        exit(1005)
 
     # Check for Internet connection before update
     print('Checking for Internet connection...')
