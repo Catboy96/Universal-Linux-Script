@@ -1,3 +1,4 @@
+![](https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/code_64.png)
 # 通用Linux脚本 (Universal Linux Script, ULS)
 *ULS 发音为 "U-Less"*  
 一个内建系统信息变量的Shell脚本，可以帮助你简化Shell脚本的开发。    
