@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # ----------------------
 # About exit codes:
-# 0: ULS exit normally
+# 0: ULS exited normally
 # 1001: "/usr/share/uls/device.json" not found.
 # 1002: ULS script path is invalid.
 # 1003: Internet is unavailable for updating.
