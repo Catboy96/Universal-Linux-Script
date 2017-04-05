@@ -1,16 +1,23 @@
 #!/bin/bash
 
-# Remove link in /usr/bin/
-rm -f /usr/bin/uls
-
-# Remove current ULS
+# Change to ULS directory
 cd /usr/share/uls
-rm -f uls.py
 
 # Get the latest version
-wget https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x uls.py
+wget -O /usr/share/uls/uls https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x uls.py
+str=$?
+if [[ $str != "0" ]]; then
+  clear
+  echo "Failed downloading the latest version. Update aborted."
+  exit
+fi
 
-# Make a link
+# Remove old version and replace with the latest version
+rm -f uls.py
+mv uls uls.py
+
+# Remove link & create a new link
+rm -f /usr/bin/uls
 ln uls.py /usr/bin/uls
 
 # Refresh system info
