@@ -20,7 +20,7 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v5 by CYRO4S")
+    print("Universal Linux Script Milestone by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
