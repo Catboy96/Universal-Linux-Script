@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # ----------------------
 # About exit codes:
@@ -12,7 +12,7 @@
 # ----------------------
 
 import platform
-import socket
+import tempfile
 import json
 import uuid
 import sys
@@ -182,7 +182,8 @@ def RunScript(strPath):
 
     # Read ULS script file
     lines = open(strPath, 'r').readlines()
-    f = open('/tmp/script.sh', 'w')
+    # Create a temporary file
+    f = tempfile.NamedTemporaryFile(mode='w+t')
 
     # Start to replace
     for s in lines:
@@ -218,15 +219,14 @@ def RunScript(strPath):
             .replace('net.mac', '\"' + j.get('net.mac') + '\"')
         )
 
-    # Save script.sh
-    f.close()
+    f.seek(0)
 
     # Then execute it
     strReturn = ''
-    strReturn = os.system('bash /tmp/script.sh')
+    strReturn = os.system('bash ' + f.name)
 
-    # Then remove 'script.sh'
-    os.remove('/tmp/script.sh')
+    # Then close the temporary file
+    f.close()
 
     # Finally, exit.
     exit(strReturn)
