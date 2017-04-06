@@ -84,9 +84,9 @@ def GetInfo():
     print('Getting system version...')
     strVersion = platform.linux_distribution()[1]
     print('Getting device architecture...')
-    strArch = platform.uname().machine
+    strArch = platform.uname()[4]
     print('Getting kernel version...')
-    strKernel = platform.uname().release
+    strKernel = platform.uname()[2]
     print('Getting hostname')
     strHostname = platform.node()
     print('Getting OS bit...')
