@@ -50,7 +50,7 @@ def GetInfo():
         pUpg = 'apt-get -y upgrade'
         pRem = 'apt-get -y remove'
         strBase = 'debian'
-    elif strDist == 'redhat' or strDist == 'redhat linux' or strDist == 'centos linux':
+    elif strDist == 'redhat' or strDist == 'redhat linux' or strDist == 'centos linux' or strDist == 'centos':
         pUpd = 'yum -y upgrade'
         pIns = 'yum -y install'
         pUpg = 'yum -y upgrade'
@@ -59,7 +59,7 @@ def GetInfo():
 
     # Get short version of distro
     strVer = ''
-    if strDist == 'centos linux':
+    if strDist == 'centos linux' or strDist == 'centos':
         rVer = os.popen('grep -oE  "[0-9.]+" /etc/redhat-release')
         strVer = rVer.read().strip('\n')[0:1]
         rVer.close()
