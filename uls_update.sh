@@ -4,7 +4,7 @@
 cd /usr/share/uls
 
 # Get the latest version
-wget -O /usr/share/uls/uls https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x uls.py
+wget -O /usr/share/uls/uls https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py
 str=$?
 if [[ $str != "0" ]]; then
   clear
@@ -15,6 +15,7 @@ fi
 # Remove old version and replace with the latest version
 rm -f uls.py
 mv uls uls.py
+chmod +x uls.py
 
 # Remove link & create a new link
 rm -f /usr/bin/uls
