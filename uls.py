@@ -146,7 +146,7 @@ def GetInfo():
         'pkg.upgrade': pUpg,
         'pkg.remove': pRem,
         'sys.os': strDist,
-        'sys.osbase': strBase,
+        'sys.baseos': strBase,
         'sys.version': strVersion,
         'sys.ver': strVer,
         'sys.arch': strArch,
@@ -213,7 +213,7 @@ def RunScript(strPath):
             
             # Replace SYS.*
             .replace('sys.os', '\"' + j.get('sys.os') + '\"') \
-            .replace('sys.osbase', '\"' + j.get('sys.osbase') + '\"') \
+            .replace('sys.baseos', '\"' + j.get('sys.osbase') + '\"') \
             .replace('sys.version', '\"' + j.get('sys.version') + '\"') \
             .replace('sys.ver', '\"' + j.get('sys.ver') + '\"') \
             .replace('sys.arch', '\"' + j.get('sys.arch') + '\"') \
