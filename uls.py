@@ -213,7 +213,7 @@ def RunScript(strPath):
             
             # Replace SYS.*
             .replace('sys.os', '\"' + j.get('sys.os') + '\"') \
-            .replace('sys.baseos', '\"' + j.get('sys.osbase') + '\"') \
+            .replace('sys.baseos', '\"' + j.get('sys.baseos') + '\"') \
             .replace('sys.version', '\"' + j.get('sys.version') + '\"') \
             .replace('sys.ver', '\"' + j.get('sys.ver') + '\"') \
             .replace('sys.arch', '\"' + j.get('sys.arch') + '\"') \
