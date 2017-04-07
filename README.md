@@ -1,6 +1,7 @@
 ![](https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/code_64.png)
 # Universal Linux Script
 [![AUR](https://img.shields.io/aur/license/yaourt.svg)]() [![AUR](https://img.shields.io/badge/uls-Milestone-green.svg)]()  
+***
 *ULS Pronounces "U-Less"*.  
 A shell script with built-in variables which can simply script writting.  
 For example, ```pkg.install nginx``` equals ```apt-get -y install nginx``` on Debian & ```yum -y install nginx``` on CentOS.  
