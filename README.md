@@ -39,6 +39,9 @@ fi
 ## Starting Guide: How to setup & run ULS script  
 [Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/Starting-Guide:-How-to-setup-&-run-ULS-script)  
   
+## ULS Script writer's beginning guide
+[Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/ULS-Script-writer's-beginning-guide)
+  
 ## All built-in variables  
 [Go to wiki](https://github.com/CYRO4S/Universal-Linux-Script/wiki/All-built-in-variables)  
   
