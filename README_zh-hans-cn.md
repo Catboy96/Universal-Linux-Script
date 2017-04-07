@@ -39,6 +39,9 @@ fi
 ## 安装与使用ULS  
 [前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8ULS)  
   
+## 脚本撰写者指南
+[前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E8%84%9A%E6%9C%AC%E6%92%B0%E5%86%99%E8%80%85%E6%8C%87%E5%8D%97)
+  
 ## 所有内建的语句和变量 
 [前往Wiki-中文](https://github.com/CYRO4S/Universal-Linux-Script/wiki/%E6%89%80%E6%9C%89%E5%86%85%E5%BB%BA%E7%9A%84%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%8F%98%E9%87%8F)  
   
