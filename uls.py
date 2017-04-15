@@ -164,8 +164,14 @@ def GetInfo():
         'net.localip': strLocalIP,
         'net.mac': strMac
     }
-    
-    with open('/usr/share/uls/device.json', 'w') as f:
+
+    strConfigPath = '/usr/share/uls/device.json'
+    strConfigDir = os.path.dirname(strConfigPath)
+
+    if not os.path.exists(strConfigDir):
+        print("making directory: {DIR}".format(DIR=strConfigDir))
+        os.makedirs(strConfigDir)
+    with open(strConfigPath, 'w') as f:
         json.dump(strJson, f, sort_keys=False, indent=4)
 
     # Finalize
@@ -173,6 +179,7 @@ def GetInfo():
     print("All done. Now you can run ULS scripts by using 'uls [ULS Script Path]' command,")
     print("or you can refresh system information by using 'uls --getinfo' command,")
     print("or you can update ULS to the latest version by using 'uls --update command.'")
+
 
 # Run the script.
 def RunScript(strPath):
@@ -202,40 +209,36 @@ def RunScript(strPath):
     # Create a temporary file
     f = tempfile.NamedTemporaryFile(mode='w+t')
 
+    KeywordsList = [
+            # pkg.* (package manage commands)
+            # usually need root privileges
+            ("pkg.install",  True), ("pkg.remove", True),
+            ("pkg.update", True), ("pkg.upgrade", True),
+
+            ("dev.cores", False), ("dev.cpu", False),
+            ("dev.freq", False), ("dev.ram", False),
+            ("dev.swap", False), ("dev.virt", False),
+
+            ("net.ip", False), ("net.ipv6", False),
+            ("net.localip", False), ("net.mac", False),
+
+            ("sys.arch", False), ("sys.baseos", False),
+            ("sys.bit", False), ("sys.hostname", False),
+            ("sys.kernel", False), ("sys.os", False),
+            ("sys.ver", False), ("sys.version", False)]
     # Start to replace
-    for s in lines:
-        f.write(
-            # Replace PKG.*
-            s.replace('pkg.update', strSudo + j.get('pkg.update')) \
-            .replace('pkg.install', strSudo + j.get('pkg.install')) \
-            .replace('pkg.upgrade', strSudo + j.get('pkg.upgrade')) \
-            .replace('pkg.remove', strSudo + j.get('pkg.remove')) \
-            
-            # Replace SYS.*
-            .replace('sys.os', '\"' + j.get('sys.os') + '\"') \
-            .replace('sys.baseos', '\"' + j.get('sys.baseos') + '\"') \
-            .replace('sys.version', '\"' + j.get('sys.version') + '\"') \
-            .replace('sys.ver', '\"' + j.get('sys.ver') + '\"') \
-            .replace('sys.arch', '\"' + j.get('sys.arch') + '\"') \
-            .replace('sys.bit', '\"' + j.get('sys.bit') + '\"') \
-            .replace('sys.kernel', '\"' + j.get('sys.kernel') + '\"') \
-            .replace('sys.hostname', '\"' + j.get('sys.hostname') + '\"') \
-            .replace('sys.root', '\"' + strRoot + '\"') \
-
-            # Replace DEV.*
-            .replace('dev.virt', '\"' + j.get('dev.virt') + '\"') \
-            .replace('dev.cpu', '\"' + j.get('dev.cpu') + '\"') \
-            .replace('dev.cores', '\"' + j.get('dev.cores') + '\"') \
-            .replace('dev.freq', '\"' + j.get('dev.freq') + '\"') \
-            .replace('dev.ram', '\"' + j.get('dev.ram') + '\"') \
-            .replace('dev.swap', '\"' + j.get('dev.swap') + '\"') \
-
-            # Replace NET.*
-            .replace('net.ip', '\"' + j.get('net.ip') + '\"') \
-            .replace('net.ipv6', '\"' + j.get('net.ipv6') + '\"') \
-            .replace('net.localip', '\"' + j.get('net.localip') + '\"') \
-            .replace('net.mac', '\"' + j.get('net.mac') + '\"')
-        )
+    for newLine in lines:
+        for keyword, needRoot in KeywordsList:
+            if keyword in newLine:
+                jsonData = j.get(keyword).strip()
+                if len(jsonData) < 1:
+                    jsonData = "[warning] *{KWORD}* is None".format(KWORD=keyword)
+                newLine = newLine.replace(keyword, jsonData)
+                if needRoot:
+                    newLine = strSudo + newLine
+                # just allow one replacement perline
+                break
+        f.write(newLine)
 
     f.seek(0)
 
