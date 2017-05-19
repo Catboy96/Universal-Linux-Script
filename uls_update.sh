@@ -4,7 +4,7 @@
 cd /usr/share/uls
 
 # Get the latest version
-wget -O /usr/share/uls/uls https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py
+wget --no-check-certificate -O /usr/share/uls/uls https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py
 str=$?
 if [[ $str != "0" ]]; then
   clear
