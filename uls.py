@@ -274,7 +274,7 @@ def Update():
         print('ERR_1003: Internet is unavailable. Check your connection before running update.')
         exit(1003)
 
-    # Now, do the update
+    # Now, do the update 
     os.system("wget --no-check-certificate -O /usr/share/uls/uls_update.sh https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash /usr/share/uls/uls_update.sh")
     exit(0)
 
