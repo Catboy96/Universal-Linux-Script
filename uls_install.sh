@@ -9,15 +9,6 @@ export PATH
 #   Intro:  https://github.com/CYRO4S/Universal-Linux-Script      #
 #=================================================================#
 
-# Get distro version
-function GetVersion(){
-    if [[ -s /etc/redhat-release ]];then
-        grep -oE  "[0-9.]+" /etc/redhat-release
-    else
-        grep -oE  "[0-9.]+" /etc/issue
-    fi
-}
-
 # Get CentOS version
 function GetCentosVersion(){
     local code=$1
@@ -40,7 +31,7 @@ function InstallDeb() {
 
     echo "Downloading ULS..."
     mkdir /usr/share/uls/
-    wget -O /usr/share/uls/uls.py https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x /usr/share/uls/uls.py
+    wget --no-check-certificate -O /usr/share/uls/uls.py https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x /usr/share/uls/uls.py
 
     echo "Let's make ULS a true command..."
     ln /usr/share/uls/uls.py /usr/bin/uls
@@ -62,7 +53,7 @@ function InstallCent() {
 
     echo "Downloading ULS..."
     mkdir /usr/share/uls/
-    wget -O /usr/share/uls/uls.py https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x /usr/share/uls/uls.py
+    wget --no-check-certificate -O /usr/share/uls/uls.py https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls.py && chmod +x /usr/share/uls/uls.py
 
     echo "Let's make ULS a true command..."
     ln /usr/share/uls/uls.py /usr/bin/uls
@@ -87,12 +78,7 @@ function GetDist(){
         fi
 
     elif [ ! -z "`cat /etc/issue | grep bian`" ];then
-        if GetVersion 6; then
-            echo "Debian 6 is not supported. Auto-Install aborted."
-            exit 1
-        else
-            InstallDeb
-        fi
+        InstallDeb
     elif [ ! -z "`cat /etc/issue | grep Ubuntu`" ];then
         InstallDeb
     else
