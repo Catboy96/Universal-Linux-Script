@@ -8,6 +8,7 @@
 # 1003: Internet is unavailable for updating.
 # 1004: "uls --getinfo" must be run as ROOT.
 # 1005: "uls --update" must be run as ROOT.
+# 1006: Invalid ULS keyword.
 # Other: ULS will return what the converted shell script returns.
 # ----------------------
 
@@ -20,13 +21,14 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script Milestone by CYRO4S")
+    print("Universal Linux Script v6 by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
     print("uls --help: Show this help information.")
     print("uls --getinfo: Refresh system information.")
     print("uls --update: Update ULS to latest version.")
+    print("uls --echo [ULS Keyword]: Print the value of specified ULS keyword.")
     print("uls [ULS Script Path]: Run ULS script.")
     exit(0)
 
@@ -180,7 +182,6 @@ def GetInfo():
     print("or you can refresh system information by using 'uls --getinfo' command,")
     print("or you can update ULS to the latest version by using 'uls --update command.'")
 
-
 # Run the script.
 def RunScript(strPath):
 
@@ -277,6 +278,33 @@ def Update():
     os.system("wget -O /usr/share/uls/uls_update.sh https://raw.githubusercontent.com/CYRO4S/Universal-Linux-Script/master/uls_update.sh && bash /usr/share/uls/uls_update.sh")
     exit(0)
 
+# Echo
+def Echo(strKey):
+    # Check for ROOT
+    strRoot = 'false'
+    if os.geteuid() == 0:
+        strRoot = 'true'
+
+    # Check if device.json exists
+    if not os.path.isfile('/usr/share/uls/device.json'):
+        print("ERR_1001: 'device.json' not found. Run 'uls --getinfo' to generate.")
+        exit(1001)
+
+    # Prepare device.json
+    j = json.loads(open('/usr/share/uls/device.json', 'r').read())
+
+    # Print ULS Keywords
+    if strKey == 'sys.root':
+        print(strRoot)
+        exit(0)
+    strValue = j.get(strKey)
+    if (strValue is None):
+        print("ERR_1006: Invalid ULS Keyword.")
+        exit(1006)
+    strValue = strValue.strip()
+    print(strValue)
+    exit(0)
+
 # Main
 if __name__ == '__main__':
     if len(sys.argv) == 1:
@@ -288,6 +316,8 @@ if __name__ == '__main__':
             ShowHelp()
         elif sys.argv[1] == "--update":
             Update()
+        elif sys.argv[1] == "--echo":
+            Echo(sys.argv[2])
         else:
             RunScript(sys.argv[1])
     exit(0)
