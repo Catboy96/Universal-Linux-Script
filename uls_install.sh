@@ -27,7 +27,7 @@ function InstallDeb() {
     apt-get update
 
     echo "Installing required packages..."
-    apt-get install python3 virt-what
+    apt-get -y install python3 virt-what
 
     echo "Downloading ULS..."
     mkdir /usr/share/uls/
