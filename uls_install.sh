@@ -21,7 +21,7 @@ function GetCentosVersion(){
     fi
 }
 
-# Install on Debian 7+, Ubuntu 14+
+# Install on Debian, Ubuntu 14+
 function InstallDeb() {
     echo "Updating source..."
     apt-get update
