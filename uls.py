@@ -21,7 +21,7 @@ import os
 
 # Show help.
 def ShowHelp():
-    print("Universal Linux Script v6 by CYRO4S")
+    print("Universal Linux Script v7 by CYRO4S")
     print("Visit https://github.com/CYRO4S/Universal-Linux-Script for documents and more information.")
     print("")
     print("Usage:")
@@ -70,8 +70,8 @@ def GetInfo():
         strVer = rVer.read().strip('\n')[0:1]
         rVer.close()
     elif strDist == 'ubuntu':
-        rVer = os.popen('grep -oE  "[0-9.]+" /etc/issue')
-        strVer = rVer.read().strip('\n')[0:1]
+        rVer = os.popen('lsb_release -r --short')
+        strVer = rVer.read().strip('\n')[0:2]
         rVer.close()
 
 
@@ -182,8 +182,9 @@ def GetInfo():
     print("or you can refresh system information by using 'uls --getinfo' command,")
     print("or you can update ULS to the latest version by using 'uls --update command.'")
 
+
 # Run the script.
-def RunScript(strPath):
+def RunScript(strPath, strParam):
 
     # Check for ROOT
     strSudo = 'sudo '
@@ -245,7 +246,7 @@ def RunScript(strPath):
 
     # Then execute it
     strReturn = ''
-    strReturn = os.system('bash ' + f.name)
+    strReturn = os.system('bash ' + f.name + strParam)
 
     # Then close the temporary file
     f.close()
@@ -319,5 +320,11 @@ if __name__ == '__main__':
         elif sys.argv[1] == "--echo":
             Echo(sys.argv[2])
         else:
-            RunScript(sys.argv[1])
+            strParam = ""
+            if len(sys.argv) > 2:
+                for i in range(2, len(sys.argv)):
+                    strParam = strParam + " " + sys.argv[i]
+                RunScript(sys.argv[1], strParam)
+            else:
+                RunScript(sys.argv[1], strParam)
     exit(0)
